@@ -4,7 +4,8 @@ Simple Boot http server task to serve files from classpath.
 
 ## Features
 
-- By default uses a free port starting from port 3000
+- By default uses a free port
+- Serves index.html for URIs pointing to a directory
 - Only serves files from classpath, no options to serve files from file system or
 use Ring handler. Use [something](https://github.com/pandeiro/boot-http)
 [else](https://github.com/danielsz/system) for that!

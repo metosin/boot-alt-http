@@ -4,12 +4,20 @@
             [boot.core :as core]))
 
 (def ^:private deps
-  [['http-kit "2.2.0"]])
+  '[[http-kit "2.2.0"]
+    [ring/ring-core "1.4.0"]])
 
-(core/deftask alt-http
-  "Run http-kit in a pod to serve files from classpath."
-  [p port         VAL int   "Port to be used, free port starting from 3000 is selected if not set"
-   r prefix       VAL #{str} "Classpath prefixes to serve files from"]
+(core/deftask serve
+  "Run http-kit in a pod to serve files from classpath.
+
+  If you only want the server to be only accessible from local computer, change the
+  ip option to 127.0.0.1. The default 0.0.0.0 listen address means that server
+  listens on all local interfaces, which means that unless you have firewall blocking
+  the connections, the server is accessible from other computers. The default
+  can be useful when you need to access the server from e.g. VirtualBox."
+  [i ip           VAL str   "IP to listen on, default 0.0.0.0"
+   p port         VAL int   "Port to be used, default is to use a free port"
+   r prefixes     VAL #{str} "Classpath prefixes to serve files from, default is public"]
   (let [p (-> (core/get-env)
               (update-in [:dependencies] into deps)
               pod/make-pod
@@ -18,5 +26,6 @@
                               *opts*))]
     (fn [handler]
       (fn [fileset]
-        ;; TODO: The server
+        (pod/with-call-in @p
+          (metosin.boot-alt-http.impl/start ~opts))
         (handler fileset)))))

@@ -2,9 +2,10 @@
 
 (set-env!
   :resource-paths #{"src"}
-  :dependencies   '[[org.clojure/clojure "1.7.0" :scope "provided"]
-                    [boot/core "2.5.5" :scope "provided"]
-                    [http-kit "2.2.0" :scope "test"]])
+  :dependencies   '[[org.clojure/clojure "1.8.0" :scope "provided"]
+                    [boot/core "2.6.0" :scope "provided"]
+                    [http-kit "2.2.0" :scope "test"]
+                    [ring/ring-core "1.4.0" :scope "test"]])
 
 (task-options!
   pom {:project     'metosin/boot-alt-http
