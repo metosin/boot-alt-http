@@ -27,5 +27,5 @@
     (fn [handler]
       (fn [fileset]
         (pod/with-call-in @p
-          (metosin.boot-alt-http.impl/start ~opts))
+          (metosin.boot-alt-http.impl/maybe-start ~opts))
         (handler fileset)))))
