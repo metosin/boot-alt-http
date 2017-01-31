@@ -5,7 +5,7 @@
 
 (def ^:private deps
   '[[http-kit "2.2.0"]
-    [ring/ring-core "1.4.0"]])
+    [ring/ring-core "1.5.1"]])
 
 (core/deftask serve
   "Run http-kit in a pod to serve files from classpath.
