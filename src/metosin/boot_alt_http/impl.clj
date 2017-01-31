@@ -31,6 +31,7 @@
 
 (defn stop []
   (when-let [s @server]
+    (util/dbug "Closing HTTP server at port %s" (:local-port (meta s)))
     (s)))
 
 (defn maybe-start [opts]

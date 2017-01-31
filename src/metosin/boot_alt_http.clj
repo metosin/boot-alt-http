@@ -24,6 +24,11 @@
               future)
         opts (into {} (remove (comp nil? val)
                               *opts*))]
+
+    (core/cleanup
+      (pod/with-call-in @p
+        (metosin.boot-alt-http.impl/stop)))
+
     (fn [handler]
       (fn [fileset]
         (pod/with-call-in @p
