@@ -1,4 +1,4 @@
-## Unreleased
+## 0.1.2 (31.1.2017)
 
 - Close HTTP server on Boot cleanup hook
 
