@@ -1,3 +1,11 @@
+## Unreleased
+
+- Support serving files from directories
+    - Useful with `target` task
+    - Target directory state doesn't change during the compilation
+    so using this instead of classpath will prevent not-found errors.
+    - Correctly ignores files in fileset with only [input role](https://github.com/boot-clj/boot/wiki/Filesets#roles-of-files)
+
 ## 0.1.2 (31.1.2017)
 
 - Close HTTP server on Boot cleanup hook

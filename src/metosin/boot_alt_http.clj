@@ -17,7 +17,8 @@
   can be useful when you need to access the server from e.g. VirtualBox."
   [i ip           VAL str   "IP to listen on, default 0.0.0.0"
    p port         VAL int   "Port to be used, default is to use a free port"
-   r prefixes     VAL #{str} "Classpath prefixes to serve files from, default is public"]
+   r prefixes     VAL #{str} "Classpath prefixes to serve files from, default is public"
+   d directories  VAL #{str} "Directories to serve files from"]
   (let [p (-> (core/get-env)
               (update-in [:dependencies] into deps)
               pod/make-pod

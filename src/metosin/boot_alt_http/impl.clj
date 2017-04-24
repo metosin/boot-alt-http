@@ -1,6 +1,7 @@
 (ns metosin.boot-alt-http.impl
   (:require [org.httpkit.server :as http-kit]
             [ring.middleware.resource :as resource]
+            [ring.middleware.file :as file]
             [ring.middleware.content-type :as content-type]
             [ring.middleware.not-modified :as not-modified]
             [metosin.boot-alt-http.ring-utils :as u]
@@ -8,12 +9,12 @@
 
 (def server (atom nil))
 
-(defn create-handler [{:keys [prefixes]
+;; TODO: Remove defaults
+(defn create-handler [{:keys [prefixes directories]
                        :or {prefixes #{"public"}}}]
-  (-> (reduce
-        resource/wrap-resource
-        (constantly nil)
-        prefixes)
+  (-> (constantly nil)
+      (as-> handler (reduce resource/wrap-resource handler prefixes))
+      (as-> handler (reduce #(file/wrap-file %1 %2 {:index-files? false}) handler directories))
       u/wrap-last-modified
       content-type/wrap-content-type
       not-modified/wrap-not-modified
