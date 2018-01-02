@@ -1,15 +1,14 @@
 # Boot-alt-http [![Clojars Project](https://img.shields.io/clojars/v/metosin/boot-alt-http.svg)](https://clojars.org/metosin/boot-alt-http)
 
-Simple Boot http server task to serve files from classpath.
+Simple Boot http server task to serve files
 
 ## Features
 
 - By default uses a free port
 - Serves index.html for URIs pointing to a directory
-
-## TODO / Ideas
-
 - Serve only files with Boot output [fileset role](https://github.com/boot-clj/boot/wiki/Filesets#fileset-components)
+    - Works when combined with `target` task and serving files from a directory:
+    `(comp ... (target :dir #{"boot-dev-target"}) (server :directories #{"boot-dev-target/public"}))`
 
 ## License
 
